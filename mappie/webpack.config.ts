@@ -1,35 +1,64 @@
-import path from "path";
-import webpack from "webpack";
-import { buildWebpack } from "./config/build/buildWebpack";
-import {
-  BuildMode,
-  BuildPaths,
-  BuildPlatform,
-} from "./config/build/types/types";
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+
+type Mode = 'development' | 'production'
 
 interface EnvVariables {
-  mode?: BuildMode;
-  analyzer?: boolean;
-  port?: number;
-  platform?: BuildPlatform;
+    mode: Mode,
+    port: number,
 }
 
-export default (env: EnvVariables) => {
-  const paths: BuildPaths = {
-    output: path.resolve(__dirname, "build"),
-    entry: path.resolve(__dirname, "src", "index.tsx"),
-    html: path.resolve(__dirname, "public", "index.html"),
-    public: path.resolve(__dirname, "public"),
-    src: path.resolve(__dirname, "src"),
-  };
+export default (env : EnvVariables) => {
 
-  const config: webpack.Configuration = buildWebpack({
-    port: env.port ?? 3000,
-    mode: env.mode ?? "development",
-    paths,
-    analyzer: env.analyzer,
-    platform: env.platform ?? "desktop",
-  });
+    const isDev = env.mode === 'development';
+    const isProd = env.mode === 'production';
 
-  return config;
-};
+    const config: webpack.Configuration = {
+        mode: env.mode ?? 'development',
+        entry:  path.resolve(__dirname, 'src', 'index.tsx'),
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: '[name].js',
+            clean: true,
+        },
+        plugins:[
+            new HtmlWebpackPlugin({template: path.resolve(__dirname, 'public', 'index.html')}),
+            isProd && new MiniCssExtractPlugin({
+                filename: '[name].[contenthash:8].css',
+                chunkFilename: '[name].[contenthash:8].css'
+            })
+        ],
+        module: {
+            rules: [
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    type: 'asset/resource',
+                },
+                {
+                    test: /\.css$/i,
+                    use: [
+                        isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 
+                        "css-loader"
+                    ],
+                },
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: /node-modules/,
+                }
+            ]
+        },
+        resolve: {
+            extensions: ['.tsx', '.ts', '.js'],
+        },
+        devtool: isDev && 'inline-source-map',
+        devServer: isDev ? {
+            open: true,
+            port: env.port ?? 3000,// npm run start -- --env port=5000
+        } : undefined,
+    }
+    return config;
+}
