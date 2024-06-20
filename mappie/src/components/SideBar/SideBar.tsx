@@ -2,19 +2,26 @@ import { Card } from '../../utils/Card/Card';
 import logo from '../../assets/logo.png';
 import saved_on from '../../assets/saved=on.png';
 import search_off from '../../assets/search=off.png';
+import user_image from '../../assets/user_image.png';
 import './SideBar.css';
 
 export function SideBar(){
     return (<div className="main_div">
             <div className="first_sidebar_div">
-                <img className='logo' src={logo} alt='logo'/>
-            
-                <button className="search_button">
-                    <img src={search_off} alt='search_off'/>
-                </button>
+                <div>
+                    <img className='logo' src={logo} alt='logo'/>
+                
+                    <button className="search_button">
+                        <img src={search_off} alt='search_off'/>
+                    </button>
 
-                <button className="saved_button">
-                    <img src={saved_on} alt='saved_on'/>
+                    <button className="saved_button">
+                        <img src={saved_on} alt='saved_on'/>
+                    </button>
+                </div>
+
+                <button id="user_icon">
+                    <img src={user_image} alt='user_icon'/>
                 </button>
             </div>
             
@@ -30,7 +37,7 @@ export function SideBar(){
                     </div>
                 </form>
                 
-                <h1 className="text_favourite">Избранное:</h1>
+                <h1>Избранное:</h1>
 
                 <div className="card_div">
                     <Card/>
