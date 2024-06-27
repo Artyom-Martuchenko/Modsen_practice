@@ -3,6 +3,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import { ResetCenterView } from 'utils/ResetCenterView/ResetCenterView';
 
 type Mode = 'development' | 'production'
 
@@ -18,10 +20,27 @@ export default (env : EnvVariables) => {
 
     const config: webpack.Configuration = {
         mode: env.mode ?? 'development',
-        entry:  path.resolve(__dirname, 'src', 'index.tsx'),
+        entry:{
+            index: path.resolve(__dirname, 'src', 'index.tsx'),
+            indexCSS: path.resolve(__dirname, 'public', 'index.css'),
+            App: path.resolve(__dirname, 'src', 'components', 'App', 'App.tsx'),
+            AppCSS: path.resolve(__dirname, 'src', 'components', 'App', 'App.css'),
+            SideBar: path.resolve(__dirname, 'src', 'components', 'SideBar', 'SideBar.tsx'),
+            SideBarCSS: path.resolve(__dirname, 'src', 'components', 'SideBar', 'SideBar.css'),
+            Map: path.resolve(__dirname, 'src', 'components', 'Map', 'Map.tsx'),
+            MapCSS: path.resolve(__dirname, 'src', 'components', 'Map', 'Map.css'),
+            FirstSideBar: path.resolve(__dirname, 'src', 'components', 'FirstSideBar', 'FirstSideBar.tsx'),
+            FirstSideBarCSS: path.resolve(__dirname, 'src', 'components', 'FirstSideBar', 'FirstSideBar.css'),
+            List: path.resolve(__dirname, 'src', 'components', 'List', 'List.tsx'),
+            ListCSS: path.resolve(__dirname, 'src', 'components', 'List', 'List.css'),
+            Card: path.resolve(__dirname, 'src', 'components', 'Card', 'Card.tsx'),
+            CardCSS: path.resolve(__dirname, 'src', 'components', 'Card', 'Card.css'),
+            ListInfrastructure: path.resolve(__dirname, 'src', 'components', 'ListInfrastructure', 'ListInfrastructure.tsx'),
+            ResetCenterView: path.resolve(__dirname, 'src', 'utils', 'ResetCenterView', 'ResetCenterView.tsx'),
+        },
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: '[name].js',
+            filename: '[name][contenthash:8].js',
             clean: true,
         },
         plugins:[
@@ -35,6 +54,10 @@ export default (env : EnvVariables) => {
             rules: [
                 {
                     test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    type: 'asset/resource',
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
                     type: 'asset/resource',
                 },
                 {
@@ -53,6 +76,9 @@ export default (env : EnvVariables) => {
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
+            plugins: [new TsconfigPathsPlugin({    
+                extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
+            })],
         },
         devtool: isDev && 'inline-source-map',
         devServer: isDev ? {

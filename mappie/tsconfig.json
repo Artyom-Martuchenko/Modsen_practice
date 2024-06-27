@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "strict": true,
         "outDir": "./dist/",
         "noImplicitAny": true,
         "module": "ESNext",
@@ -9,6 +10,10 @@
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
+        "baseUrl": "src",
+        "paths": {
+            "@/*": ["*/constants/"]
+        }
     },
     "ts-node": {
         "compilerOptions": {

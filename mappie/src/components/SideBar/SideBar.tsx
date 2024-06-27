@@ -1,47 +1,77 @@
-import { Card } from '../../utils/Card/Card';
-import logo from '../../assets/logo.png';
-import saved_on from '../../assets/saved=on.png';
-import search_off from '../../assets/search=off.png';
-import user_image from '../../assets/user_image.png';
+import { Card } from '../Card/Card';
+import search_icon from '../../assets/search-icon.png';
+import {useState} from 'react';
 import './SideBar.css';
+import { List } from '../List/List';
+import { FirstSideBar } from '../FirstSideBar/FirstSideBar';
+import search_btn from '../../assets/search-btn/big-2.png';
 
-export function SideBar(){
-    return (<div className="main_div">
-            <div className="first_sidebar_div">
-                <div>
-                    <img className='logo' src={logo} alt='logo'/>
-                
-                    <button className="search_button">
-                        <img src={search_off} alt='search_off'/>
-                    </button>
+interface ListItems {
+    dist : number;
+    point : { lon : number, lat : number};
+    name : string;
+    kinds : string;
+    osm : string;
+    xid : string;
+    rate : number;
+}
 
-                    <button className="saved_button">
-                        <img src={saved_on} alt='saved_on'/>
-                    </button>
-                </div>
+type actionType = 'delete' | 'add'; 
 
-                <button id="user_icon">
-                    <img src={user_image} alt='user_icon'/>
-                </button>
+interface Element {
+  name: string
+  img: string,
+  id: number,
+  active: boolean,
+  kinds: string,
+}
+
+export function SideBar({ radius, radiusHandler, infrastructure, filterOptionsHandler} : { radius:number, radiusHandler : (value : number) => void, infrastructure : ListItems[], filterOptionsHandler : (element : Element, action : actionType) => void }){
+    const [mode, setMode] = useState({ saved: false, search: false})
+    
+    const savedHandler = (prop : string) => {
+        setMode((prevState) => {
+            return prop == 'saved'? !prevState.search ? {...prevState, saved: !prevState.saved} : {search: !prevState.search, saved: !prevState.saved} : !prevState.saved ? {...prevState, search: !prevState.search} : {search: !prevState.search, saved: !prevState.saved};
+        })
+    }
+
+
+    return (
+    <div id='sidebar'>
+        <FirstSideBar mode={mode} savedHandler={savedHandler}/>
+        {mode.saved &&
+        <div className='second_sidebar_div'>
+            <div className='search_sidebar_div'>
+                <img src={search_icon} className='search_sidebar_icon' alt=''/>
+                <input type='text' className="search_sidebar_input" placeholder='Место, адрес...'/>  
             </div>
             
-            <div className="second_sidebar_div">
-                <form className="search_form">   
-                    <div className="div_search_upper">
-                        <div className="div_search_lower">
-                            <svg className="svg_search" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </div>
-                        <input type="search" id="default-search" className="input_search" placeholder="Место, адрес..." required />
-                    </div>
-                </form>
-                
-                <h1>Избранное:</h1>
+            <h2 className='text_favourite'>Избранное:</h2>
 
-                <div className="card_div">
-                    <Card/>
+            <div className="card_div">
+                <Card/>
+            </div>
+        </div>}
+        {
+            mode.search &&
+            <div className='second_sidebar_div'>
+                <div className='search_sidebar_div'>
+                    <img src={search_icon} className='search_sidebar_icon' alt=''/>
+                    <input type='text' className="search_sidebar_input" placeholder='Место, адрес...'/>  
+                </div>
+                <h3 className="text_favourite">Искать:</h3>
+                <List radius={radius} infrastructure={infrastructure} filterOptionsHandler={filterOptionsHandler}/>
+                <h3 className="text_favourite">В радиусе</h3>
+                <div className="RadiusDiv">
+                    <input type="number" className="RadiusInput" placeholder="1 - 4" onChange={(val) => radiusHandler(Number(val.target.value))}/>
+                    <h3 className='RadiusText'>км</h3>
+                </div>
+                <div className="search_btn_div">
+                    <button className="search_btn">
+                        <img className="search_img" src={search_btn} alt='search_button'/>
+                    </button>
                 </div>
             </div>
-        </div>)
+        }
+    </div>)
 }

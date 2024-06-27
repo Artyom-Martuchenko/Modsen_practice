@@ -1,0 +1,51 @@
+.big_cards {
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: rgba(196, 196, 196, 1);
+  margin: 0px 1.25rem 0px;
+  border-radius: 0.5rem;
+  width: 21.875rem;
+  height: 14.438rem;
+}
+
+.big_cards_photo {
+  width: 20rem;
+  height: 18.75rem;
+  border-radius: 10px;
+  background-color: gray;
+  margin: 1.25rem 1.25rem 0;
+}
+
+.big_cards_div {
+  display: flex;
+}
+
+.big_cards_attributes {
+  width: 30px;
+  height: 30px;
+  background-color: gray;
+}
+
+#big_cards_group {
+  margin: 1.25rem 1.875rem 2.188rem;
+}
+
+#big_cards_group_buttons {
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  all: unset;
+  height: 2.5rem;
+  border-radius: 5px;
+}
+
+#button_save {
+  border-style: solid;
+  border-width: thick;
+  border-color: gray;
+  width: 9.625rem;
+}
