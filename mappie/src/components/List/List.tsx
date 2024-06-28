@@ -19,9 +19,11 @@ export function List ({radius, infrastructure, filterOptionsHandler}:{radius : n
   const itemHandler = (item : Element) => {
     if(item.active){
       filterOptionsHandler(item, 'delete')
+      setItems((prev) => prev.filter((e) => e.id !== item.id))
       setItems((prev) => [...prev, {...item, active: false}])
     }else{
       filterOptionsHandler(item, 'add')
+      setItems((prev) => prev.filter((e) => e.id !== item.id))
       setItems((prev) => [...prev, {...item, active: true}])
     }
   }

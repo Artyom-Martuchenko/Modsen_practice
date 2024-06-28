@@ -44,7 +44,7 @@ export function Map({ radius, infrastructure, infrastructureHandler, filterOptio
                 infrastructure.length !== 0 && radius !== 0? <ListInfrastructure listInfrastructure={infrastructure} filterOptions={filterOptions}/> : undefined
             }
             <ResetCenterView selectPosition={position} />
-            <Circle center={position.lat == 0 && position.lng == 0 ? [53.904109, 27.567796] : [position.lat, position.lng]} radius={radius} color="blue"/>
+            <Circle center={position.lat == 0 && position.lng == 0 ? [minsk_center_latitude, minsk_center_longitude] : [position.lat, position.lng]} radius={radius} color="blue"/>
         </MapContainer>
     );
 }
