@@ -8,6 +8,17 @@ export const App = () => {
   const [radius, setRadius] = useState(0)
   const [infrastructure, setInfrastructure] = useState<ListItems[]>([]);
   const [filterOptions, setFilterOptions] = useState<Element[]>([])
+  const [searchName, setSearchName] = useState<string>()
+  const [xid, setXid] = useState<string>()
+
+  const xidHandler = (value : string) => {
+    setXid(value)
+  }
+
+  const searchNameHandler = (value: string) => {
+    setSearchName(value);
+    console.log(value)
+  };
 
   const infrastructureHandler = (value: ListItems[]) => {
     setInfrastructure((prev) => [...prev, ...value])
@@ -27,8 +38,8 @@ export const App = () => {
 
   return (
     <div className="app">
-      <SideBar radius={radius} radiusHandler={radiusHandler} infrastructure={infrastructure} filterOptionsHandler={filterOptionsHandler}/>
-      <Map radius={radius} filterOptions={filterOptions} infrastructure={infrastructure} infrastructureHandler={infrastructureHandler} />
+      <SideBar xid={xid} searchName={searchName} searchNameHandler={searchNameHandler} radius={radius} radiusHandler={radiusHandler} infrastructure={infrastructure} filterOptionsHandler={filterOptionsHandler}/>
+      <Map xidHandler={xidHandler} searchName={searchName} radius={radius} filterOptions={filterOptions} infrastructure={infrastructure} infrastructureHandler={infrastructureHandler} />
     </div>
   );
 };

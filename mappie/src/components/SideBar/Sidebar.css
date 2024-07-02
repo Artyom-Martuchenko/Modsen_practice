@@ -1,11 +1,4 @@
 @font-face {
-  font-family: 'MontBold';
-  src: url('../../assets/Mont/Mont-Bold.woff2') format('woff2');
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'MontLight';
   src: url('../../assets/Mont/Mont-Light.woff2') format('woff2');
   font-weight: 600;
@@ -24,13 +17,10 @@
   flex-direction: row;
 }
 
-
-
 #sidebar{
   display: flex;
   max-width: 37.5rem;
 }
-
 
 .second_sidebar_div {
   display: inline;
@@ -167,12 +157,6 @@
   display: flex;
   justify-content: space-between;
 }
-
-/* button {
-  all: unset;
-  height: 2.5rem;
-  border-radius: 5px;
-} */
 
 #button_save{
   border-style: solid;

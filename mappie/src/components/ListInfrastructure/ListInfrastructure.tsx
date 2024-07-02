@@ -1,6 +1,6 @@
 import { Marker, Popup } from "react-leaflet";
 import {
-  List,
+  Element,
   ListItems,
   customNature,
   customHistory,
@@ -19,9 +19,20 @@ import {
   customCenzured,
 } from "../../constants/constants";
 
+export interface List {
+  listInfrastructure: ListItems[];
+  filterOptions: Element[];
+  searchName : string | undefined;
+  endPositionHandler: (value: number[] | null, profile : "driving-car" | "foot-walking" | null) => void;
+  xidHandler: (value : any) => any,
+}
+
 export function ListInfrastructure({
   listInfrastructure,
   filterOptions,
+  endPositionHandler,
+  searchName,
+  xidHandler
 }: List) {
   const difineType = (prop: string) => {
     if (prop.includes("nature")) {
@@ -57,7 +68,7 @@ export function ListInfrastructure({
     }
   };
 
-  const filterInfrastructure = (infrastructure: any) => {
+  const filterInfrastructure = (infrastructure: any, searchName: string) => {
     if (filterOptions.length != 0) {
       for (let index = 0; index < filterOptions.length; index++) {
         if (infrastructure.kinds.includes(filterOptions[index].kinds)) {
@@ -65,20 +76,38 @@ export function ListInfrastructure({
         }
       }
     }
+
+    if(searchName !== ''){
+      if(infrastructure.name.includes(searchName)){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     return filterOptions.length == 0;
   };
 
   return (
     <div>
       {listInfrastructure
-        .filter((infrastructure) => filterInfrastructure(infrastructure))
+        .filter((infrastructure) => filterInfrastructure(infrastructure, typeof searchName === 'undefined' ? '' : searchName))
         .map((el: ListItems) => (
           <Marker
             position={{ lat: el.point.lat, lng: el.point.lon }}
             key={Math.random()}
             icon={difineType(el.kinds)}
+            eventHandlers={{ click: xidHandler(el.xid)}}
           >
-            <Popup>{el.name}</Popup>
+            <Popup>
+              {el.name}
+              <select title="type_moving" onChange={(e : any) => e.target.value != '' ? endPositionHandler([el.point.lat, el.point.lon], e.target.value) : endPositionHandler(null, null)}>
+                <option value=''>-</option>
+                {/* "driving-car" | "foot-walking" */}
+                <option value="foot-walking">Добраться пешком</option>
+                <option value="driving-car">Добраться на машине</option>
+              </select>
+            </Popup>
           </Marker>
         ))}
     </div>

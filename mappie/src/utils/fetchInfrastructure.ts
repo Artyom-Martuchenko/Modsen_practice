@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ListItems, kinds } from "../constants/constants";
+import { useState } from 'react';
 
 export const fetchInfrastructure = async ({
   radius,
@@ -9,11 +10,11 @@ export const fetchInfrastructure = async ({
 }: {
   radius: number;
   position: { lat: number; lng: number };
-  infrastructureHandler: (value: ListItems[]) => any;
+  infrastructureHandler: (value: any) => any;
   infrastructure: ListItems[];
 }) => {
-
   const responseFilter = (e: ListItems) => {
+
     if (e.name == "") {
       return false;
     }
@@ -26,6 +27,7 @@ export const fetchInfrastructure = async ({
   };
 
   try {
+    infrastructureHandler([])
     for (let kind of kinds) {
       const response = await axios.get(
         "https://api.opentripmap.com/0.1/ru/places/radius",
@@ -43,12 +45,14 @@ export const fetchInfrastructure = async ({
         }
       );
       response.data = response.data.filter((e: ListItems) => responseFilter(e));
-      const result = Array.from(new Set([...infrastructure, response.data]))
-      if(result[0].length > 0){
-        infrastructureHandler(result[0]);
-      }
-      console.log(Array.from(new Set([...infrastructure, response.data])));
+      infrastructureHandler(response.data);
     }
+    infrastructureHandler((prev : ListItems[]) => prev.reduce((o:ListItems[], i:ListItems) => {
+      if(!o.find(v => v.xid===i.xid)){
+        o.push(i)
+      }
+      return o;
+    }, []))
   } catch (error) {
     console.error("Error fetching infrastructure:", error);
   }

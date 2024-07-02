@@ -4,7 +4,6 @@ import webpack from 'webpack';
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
-import { ResetCenterView } from 'utils/ResetCenterView/ResetCenterView';
 
 type Mode = 'development' | 'production'
 
@@ -37,6 +36,12 @@ export default (env : EnvVariables) => {
             CardCSS: path.resolve(__dirname, 'src', 'components', 'Card', 'Card.css'),
             ListInfrastructure: path.resolve(__dirname, 'src', 'components', 'ListInfrastructure', 'ListInfrastructure.tsx'),
             ResetCenterView: path.resolve(__dirname, 'src', 'utils', 'ResetCenterView', 'ResetCenterView.tsx'),
+            SavedBar: path.resolve(__dirname, 'src', 'components', 'SavedBar', 'SavedBar.tsx'), 
+            SavedBarCSS: path.resolve(__dirname, 'src', 'components', 'SavedBar', 'SavedBar.css'), 
+            SearchBar: path.resolve(__dirname, 'src', 'components', 'SearchBar', 'SearchBar.tsx'), 
+            SearchBarCSS: path.resolve(__dirname, 'src', 'components', 'SearchBar', 'SearchBar.css'), 
+            SearchInput: path.resolve(__dirname, 'src', 'components', 'SearchInput', 'SearchInput.tsx'), 
+            SearchInputCSS: path.resolve(__dirname, 'src', 'components', 'SearchInput', 'SearchInput.css'), 
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
