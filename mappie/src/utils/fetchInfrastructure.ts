@@ -1,6 +1,5 @@
 import axios from "axios";
 import { ListItems, kinds } from "../constants/constants";
-import { useState } from 'react';
 
 export const fetchInfrastructure = async ({
   radius,
@@ -18,6 +17,7 @@ export const fetchInfrastructure = async ({
     if (e.name == "") {
       return false;
     }
+    
     for(let index = 0; index < infrastructure.length; index++){
       if(infrastructure[index].xid === e.xid){
         return false;
@@ -45,14 +45,12 @@ export const fetchInfrastructure = async ({
         }
       );
       response.data = response.data.filter((e: ListItems) => responseFilter(e));
-      infrastructureHandler(response.data);
-    }
-    infrastructureHandler((prev : ListItems[]) => prev.reduce((o:ListItems[], i:ListItems) => {
-      if(!o.find(v => v.xid===i.xid)){
-        o.push(i)
+      const result = Array.from(new Set([...infrastructure, response.data]))
+      if(result[0].length > 0){
+        console.log(result[0]);
+        infrastructureHandler(result[0]);
       }
-      return o;
-    }, []))
+    }
   } catch (error) {
     console.error("Error fetching infrastructure:", error);
   }

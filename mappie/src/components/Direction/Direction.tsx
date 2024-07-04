@@ -1,7 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { Polyline } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { LatLngExpression, LatLngBounds} from "leaflet";
 
 interface RoutingResponse {
   routes: {
@@ -63,10 +62,7 @@ export function Direction({
   const apiKey = "5b3ce3597851110001cf62483fa5a58ee172490c9e958d4a7382d1dd";
   const ors = new OpenRouteService(apiKey);
   const [routeData, setRouteData] = useState<any[][]>([]);
-  console.log(start)
-  console.log(end)
-  console.log(profile)
-
+  
   useEffect(()=>{
     if(profile !== null){
       ors

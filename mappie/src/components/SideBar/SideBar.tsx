@@ -4,6 +4,8 @@ import { FirstSideBar } from "../FirstSideBar/FirstSideBar";
 import { fetchSearch } from "utils/fetchSearch";
 import { SavedBar } from "components/SavedBar/SavedBar";
 import { SearchBar } from "components/SearchBar/SearchBar";
+import { BigCard } from "components/BigCard/BigCard"
+import { useEffect } from "react";
 
 interface ListItems {
   dist: number;
@@ -32,13 +34,13 @@ export function SideBar({
   filterOptionsHandler,
   searchName,
   searchNameHandler,
-  xid
+  xid,
 }: {
   radius: number;
   radiusHandler: (value: number) => void;
   infrastructure: ListItems[];
   searchName: string | undefined;
-  searchNameHandler: (value:string) => void;
+  searchNameHandler: (value: string) => void;
   filterOptionsHandler: (element: Element, action: actionType) => void;
   xid: string | undefined;
 }) {
@@ -49,13 +51,12 @@ export function SideBar({
     setSearchData(value);
   };
 
-  const searchHandler = () => {
-    console.log(searchName);
-    if (typeof searchName !== "undefined") {
+  useEffect(() => {
+    if (typeof xid != "undefined") {
       fetchSearch({ searchDataHandler, xid });
     }
-    console.log(searchData);
-  };
+    // console.log(searchData);
+  }, [xid]);
 
   const savedHandler = (prop: string) => {
     setMode((prevState) => {
@@ -72,16 +73,22 @@ export function SideBar({
   return (
     <div id="sidebar">
       <FirstSideBar mode={mode} savedHandler={savedHandler} />
-      {mode.saved && <SavedBar searchNameHandler={searchNameHandler}/>}
-      {mode.search && (
+      {mode.saved && typeof xid === "undefined" && (
+        <SavedBar searchNameHandler={searchNameHandler} />
+      )}
+      {mode.search && typeof xid === "undefined" && (
         <SearchBar
           radius={radius}
           infrastructure={infrastructure}
           filterOptionsHandler={filterOptionsHandler}
           radiusHandler={radiusHandler}
-          searchHandler={searchHandler}
           searchNameHandler={searchNameHandler}
         />
+      )}
+      {typeof xid !== "undefined" && (
+        <div className="details-div">
+          <BigCard />
+        </div>
       )}
     </div>
   );

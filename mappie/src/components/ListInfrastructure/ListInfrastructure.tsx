@@ -95,18 +95,17 @@ export function ListInfrastructure({
         .map((el: ListItems) => (
           <Marker
             position={{ lat: el.point.lat, lng: el.point.lon }}
-            key={Math.random()}
+            key={Math.random()} //el.xid
             icon={difineType(el.kinds)}
-            eventHandlers={{ click: xidHandler(el.xid)}}
           >
             <Popup>
               {el.name}
               <select title="type_moving" onChange={(e : any) => e.target.value != '' ? endPositionHandler([el.point.lat, el.point.lon], e.target.value) : endPositionHandler(null, null)}>
                 <option value=''>-</option>
-                {/* "driving-car" | "foot-walking" */}
                 <option value="foot-walking">Добраться пешком</option>
                 <option value="driving-car">Добраться на машине</option>
               </select>
+              <button onClick={()=>xidHandler(el.xid)}>Info</button>
             </Popup>
           </Marker>
         ))}

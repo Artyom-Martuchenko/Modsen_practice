@@ -13,6 +13,7 @@ export const App = () => {
 
   const xidHandler = (value : string) => {
     setXid(value)
+    console.log(value)
   }
 
   const searchNameHandler = (value: string) => {

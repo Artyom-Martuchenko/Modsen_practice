@@ -9,15 +9,13 @@ export function SearchBar({
   infrastructure,
   filterOptionsHandler,
   radiusHandler,
-  searchHandler,
   searchNameHandler,
 }: {
-    radius: number;
-    infrastructure: ListItems[];
-    filterOptionsHandler: (element : Element, action : actionType) => void,
-    radiusHandler: (value: number) => void;
-    searchHandler: () => void;
-    searchNameHandler: (value : string) => void; 
+  radius: number;
+  infrastructure: ListItems[];
+  filterOptionsHandler: (element : Element, action : actionType) => void,
+  radiusHandler: (value: number) => void;
+  searchNameHandler: (value : string) => void;
 }) {
   return (
     <div className="second_sidebar_div">
@@ -39,7 +37,7 @@ export function SearchBar({
         <h3 className="RadiusText">км</h3>
       </div>
       <div className="search_btn_div">
-        <button className="search_btn" onClick={searchHandler}>
+        <button className="search_btn">
           <img className="search_img" src={search_btn} alt="search_button" />
         </button>
       </div>
