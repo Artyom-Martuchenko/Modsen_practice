@@ -47,14 +47,14 @@ export default (env : EnvVariables) => {
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: '[name][contenthash:8].js',
+            filename: '[name]bundle.js',
             clean: true,
         },
         plugins:[
             new HtmlWebpackPlugin({template: path.resolve(__dirname, 'public', 'index.html')}),
             isProd && new MiniCssExtractPlugin({
-                filename: '[name].[contenthash:8].css',
-                chunkFilename: '[name].[contenthash:8].css'
+                filename: '[name]bundle.css',
+                chunkFilename: '[name]bundleChunk.css'
             })
         ],
         module: {
@@ -83,9 +83,9 @@ export default (env : EnvVariables) => {
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
-            plugins: [new TsconfigPathsPlugin({    
-                extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
-            })],
+            alias: {
+                '@': path.resolve(__dirname, 'src/assets/'),
+            },
         },
         devtool: isDev && 'inline-source-map',
         devServer: isDev ? {

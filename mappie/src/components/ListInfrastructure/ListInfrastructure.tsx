@@ -34,37 +34,36 @@ export function ListInfrastructure({
   searchName,
   xidHandler
 }: List) {
-  const difineType = (prop: string) => {
-    if (prop.includes("nature")) {
-      return customNature;
-    } else if (prop.includes("histor")) {
-      return customHistory;
-    } else if (prop.includes("industr")) {
-      return customIndustry;
-    } else if (prop.includes("car")) {
-      return customCar;
-    } else if (prop.includes("shop") || prop.includes("market")) {
-      return customShop;
-    } else if (prop.includes("bicycl")) {
-      return customBicycleRoad;
-    } else if (prop.includes("bank")) {
-      return customBank;
-    } else if (prop.includes("park")) {
-      return customPark;
-    } else if (prop.includes("gym") || prop.includes("stadium")) {
-      return customSport;
-    } else if (prop.includes("cultur")) {
-      return customCulture;
-    } else if (prop.includes("church") || prop.includes("religion")) {
-      return customChurch;
-    } else if (prop.includes("food")) {
-      return customFood;
-    } else if (prop.includes("adult")) {
-      return customCenzured;
-    } else if (prop.includes("accomodations")) {
-      return customHotels;
-    } else {
+  const keywords = [
+    'nature', 'histor', 'industr', 'car', 'shop', 'market', 'bicycl',
+    'bank', 'park', 'gym', 'stadium', 'cultur', 'church', 'religion',
+    'food', 'adult', 'accomodations'
+  ].sort();
+  
+  const defineType = (prop: string) => {
+    const index = keywords.findIndex(kw => prop.includes(kw));
+    if (index === -1) {
       return other;
+    }
+    switch (index) {
+      case 0: return customNature;
+      case 1: return customHistory;
+      case 2: return customIndustry;
+      case 3: return customCar;
+      case 4: return customShop;
+      case 5: return customShop;
+      case 6: return customBicycleRoad;
+      case 7: return customBank;
+      case 8: return customPark;
+      case 9: return customSport;
+      case 10: return customSport;
+      case 11: return customCulture;
+      case 12: return customChurch;
+      case 13: return customChurch;
+      case 14: return customFood;
+      case 15: return customCenzured;
+      case 16: return customHotels;
+      default: return other;
     }
   };
 
@@ -96,7 +95,7 @@ export function ListInfrastructure({
           <Marker
             position={{ lat: el.point.lat, lng: el.point.lon }}
             key={Math.random()} //el.xid
-            icon={difineType(el.kinds)}
+            icon={defineType(el.kinds)}
           >
             <Popup>
               {el.name}

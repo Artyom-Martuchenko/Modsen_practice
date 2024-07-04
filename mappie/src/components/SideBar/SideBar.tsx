@@ -1,31 +1,12 @@
 import { useState } from "react";
 import "./SideBar.css";
 import { FirstSideBar } from "../FirstSideBar/FirstSideBar";
-import { fetchSearch } from "utils/fetchSearch";
-import { SavedBar } from "components/SavedBar/SavedBar";
-import { SearchBar } from "components/SearchBar/SearchBar";
-import { BigCard } from "components/BigCard/BigCard"
+import { fetchSearch } from "../../utils/fetchSearch";
+import { SavedBar } from "../SavedBar/SavedBar";
+import { SearchBar } from "../SearchBar/SearchBar";
+import { BigCard } from "../BigCard/BigCard"
 import { useEffect } from "react";
-
-interface ListItems {
-  dist: number;
-  point: { lon: number; lat: number };
-  name: string;
-  kinds: string;
-  osm: string;
-  xid: string;
-  rate: number;
-}
-
-type actionType = "delete" | "add";
-
-interface Element {
-  name: string;
-  img: string;
-  id: number;
-  active: boolean;
-  kinds: string;
-}
+import { actionType, Element, ListItems } from "./SideBarTypes";
 
 export function SideBar({
   radius,
@@ -86,7 +67,7 @@ export function SideBar({
         />
       )}
       {typeof xid !== "undefined" && (
-        <div className="details-div">
+        <div className="details_div">
           <BigCard />
         </div>
       )}

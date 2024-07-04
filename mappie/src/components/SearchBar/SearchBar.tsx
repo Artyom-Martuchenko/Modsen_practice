@@ -1,8 +1,8 @@
-import { ListItems, Element, actionType } from "constants/constants";
+import { actionType, Element, ListItems } from './SearchBarTypes';
 import search_btn from '../../assets/search-btn/big-2.png';
 import { List } from "../List/List";
 import './SearchBar.css';
-import { SearchInput } from "components/SearchInput/SearchInput";
+import { SearchInput } from "../SearchInput/SearchInput";
 
 export function SearchBar({
   radius,

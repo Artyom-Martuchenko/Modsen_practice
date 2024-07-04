@@ -1,18 +1,18 @@
-import culture from'../assets/culture.png';
-import nature from'../assets/nature.png';
-import history from '../assets/history.png';
-import industry from'../assets/Property 1=fa-solid_industry.png';
-import car from'../assets/Property 1=fa_car.png';
-import market from'../assets/Property 1=fontisto_shopping-basket.png';
-import bank from'../assets/bank.png';
-import park from'../assets/Property 1=majesticons_ferris-wheel.png';
-import bicycle_road from'../assets/Property 1=ph_bicycle.png';
-import cenzured from'../assets/18+.png';
-import sport from'../assets/Property 1=fluent_sport-soccer-16-filled.png';
-import church from'../assets/church.png';
-import food from'../assets/food.png';
-import hotels from'../assets/hotels.png';
-import intresting_places from '../assets/other.png';
+import culture from'@/culture.png';
+import nature from'@/nature.png';
+import history from '@/history.png';
+import industry from'@/Property 1=fa-solid_industry.png';
+import car from'@/Property 1=fa_car.png';
+import market from'@/Property 1=fontisto_shopping-basket.png';
+import bank from'@/bank.png';
+import park from'@/Property 1=majesticons_ferris-wheel.png';
+import bicycle_road from'@/Property 1=ph_bicycle.png';
+import cenzured from'@/18+.png';
+import sport from'@/Property 1=fluent_sport-soccer-16-filled.png';
+import church from'@/church.png';
+import food from'@/food.png';
+import hotels from'@/hotels.png';
+import intresting_places from '@/other.png';
 import { Icon } from 'leaflet';
 
 

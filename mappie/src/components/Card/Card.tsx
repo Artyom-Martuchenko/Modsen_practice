@@ -1,7 +1,7 @@
-import save_symbol from '../../assets/save_cards.png';
-import arrow_symbol from '../../assets/arrow_cards.png';
-import culture from '../../assets/culture.png';
-import history from '../../assets/history.png';
+import save_symbol from '@/save_cards.png';
+import arrow_symbol from '@/arrow_cards.png';
+import culture from '@/culture.png';
+import history from '@/history.png';
 import './Card.css';
 
 export function Card(){

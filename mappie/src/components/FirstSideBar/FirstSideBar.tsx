@@ -1,10 +1,10 @@
-import logo from '../../assets/logo.png';
-import saved_on from '../../assets/saved=on.png';
-import saved_off from '../../assets/saved=off.png';
-import search_off from '../../assets/search=off.png';
-import search_on from '../../assets/search=on.png';
-import user_image from '../../assets/user_image.png';
-import { Prop } from '../../constants/constants';
+import logo from '@/logo.png';
+import saved_on from '@/saved=on.png';
+import saved_off from '@/saved=off.png';
+import search_off from '@/search=off.png';
+import search_on from '@/search=on.png';
+import user_image from '@/user_image.png';
+import {Prop} from './FirstSideBarTypes'
 
 export function FirstSideBar({mode, savedHandler} : Prop){
     return(

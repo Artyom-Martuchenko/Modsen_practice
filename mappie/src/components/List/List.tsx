@@ -1,6 +1,7 @@
 import './List.css';
 import { useState } from 'react';
-import { Element, actionType, dummy_items } from '../../constants/constants';
+import { dummy_items } from '../../constants/constants';
+import { Element, actionType } from './ListTypes';
 
 export function List ({radius, infrastructure, filterOptionsHandler}:{radius : number, infrastructure : any[], filterOptionsHandler : (element : Element, action : actionType) => void}){
   const [items, setItems] = useState(dummy_items)

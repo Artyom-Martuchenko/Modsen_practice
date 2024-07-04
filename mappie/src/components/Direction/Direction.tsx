@@ -1,25 +1,18 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { Polyline } from "react-leaflet";
 import { useEffect, useState } from "react";
-
-interface RoutingResponse {
-  routes: {
-    geometry: { coordinates: any[] }; //string { coordinates : number[][] }
-    properties: object;
-    distance: number;
-    duration: number;
-  }[];
-  features: {geometry: { coordinates: any[] }}[];
-}
+import {RoutingResponse} from './DirectionTypes';
 
 class OpenRouteService {
   private client: AxiosInstance;
   private apiKey: string;
+  private apiUrl: string;
 
-  constructor(apiKey: string) {
+  constructor(apiKey: string, apiUrl: string) {
     this.apiKey = apiKey;
+    this.apiUrl = apiUrl;
     this.client = axios.create({
-      baseURL: "https://api.openrouteservice.org/v2/directions",
+      baseURL: this.apiUrl,
       headers: {
         Accept:
           "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8",
@@ -59,8 +52,12 @@ export function Direction({
   end: number[];
   profile: "driving-car" | "foot-walking" | null;
 }) {
-  const apiKey = "5b3ce3597851110001cf62483fa5a58ee172490c9e958d4a7382d1dd";
-  const ors = new OpenRouteService(apiKey);
+  const apiKey = process.env.OPEN_ROUTE_SERVICE_KEY;
+  const apiUrl = process.env.OPEN_ROUTE_SERVCE;
+  if(apiKey === undefined || apiUrl === undefined){
+    throw Error('Cant get process.env')
+  }
+  const ors = new OpenRouteService(apiKey, apiUrl);
   const [routeData, setRouteData] = useState<any[][]>([]);
   
   useEffect(()=>{

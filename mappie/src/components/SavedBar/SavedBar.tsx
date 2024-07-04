@@ -1,5 +1,5 @@
 import {Card} from '../Card/Card';
-import { SearchInput } from 'components/SearchInput/SearchInput';
+import { SearchInput } from '../SearchInput/SearchInput';
 import './SavedBar.css';
 
 export function SavedBar({searchNameHandler}:{searchNameHandler:(value:string) => void}){

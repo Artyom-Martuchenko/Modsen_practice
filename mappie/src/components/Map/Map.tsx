@@ -6,8 +6,9 @@ import './Map.css';
 import { ListInfrastructure } from "../ListInfrastructure/ListInfrastructure";
 import { ResetCenterView } from "../../utils/ResetCenterView/ResetCenterView";
 import { fetchInfrastructure } from "../../utils/fetchInfrastructure";
-import { Element, ListItems, Marker_icon_height, Marker_icon_width, minsk_center_latitude, minsk_center_longitude} from "../../constants/constants";
+import { Marker_icon_height, Marker_icon_width, minsk_center_latitude, minsk_center_longitude} from "../../constants/constants";
 import { Direction } from "../Direction/Direction";
+import { ListItems, Element } from "./MapTypes";
 
 export function Map({ radius, infrastructure, infrastructureHandler, filterOptions, searchName, xidHandler}:{ xidHandler: (value:string) => void, searchName : string | undefined,radius : number, infrastructure : ListItems[], infrastructureHandler : (value : ListItems[]) => void, filterOptions : Element[]}){
     const [endPosition, setEndPosition] = useState<null | number[]>(null);
