@@ -11,9 +11,17 @@ export const App = () => {
   const [searchName, setSearchName] = useState<string>()
   const [xid, setXid] = useState<string>()
 
-  const xidHandler = (value : string) => {
+  const [profile, setProfile] = useState<null | 'driving-car' | 'foot-walking'>(null)
+  const [endPosition, setEndPosition] = useState<null | number[]>(null);
+
+  const endPositionHandler = (value : number[] | null, prof: "driving-car" | "foot-walking" | null) => {
+    setEndPosition(value)
+    setProfile(prof)
+    console.log(profile)
+  }
+
+  const xidHandler = (value : string | undefined) => {
     setXid(value)
-    console.log(value)
   }
 
   const searchNameHandler = (value: string) => {
@@ -37,10 +45,11 @@ export const App = () => {
     }
   }
 
+  
   return (
     <div className="app">
-      <SideBar xid={xid} searchName={searchName} searchNameHandler={searchNameHandler} radius={radius} radiusHandler={radiusHandler} infrastructure={infrastructure} filterOptionsHandler={filterOptionsHandler}/>
-      <Map xidHandler={xidHandler} searchName={searchName} radius={radius} filterOptions={filterOptions} infrastructure={infrastructure} infrastructureHandler={infrastructureHandler} />
+      <SideBar profile={profile} endPositionHandler={endPositionHandler} xid={xid} xidHandler={xidHandler} searchName={searchName} searchNameHandler={searchNameHandler} radius={radius} radiusHandler={radiusHandler} infrastructure={infrastructure} filterOptionsHandler={filterOptionsHandler}/>
+      <Map xid={xid} profile={profile} endPosition={endPosition} xidHandler={xidHandler} searchName={searchName} radius={radius} filterOptions={filterOptions} infrastructure={infrastructure} infrastructureHandler={infrastructureHandler} />
     </div>
   );
 };

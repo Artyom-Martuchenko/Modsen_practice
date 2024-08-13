@@ -15,3 +15,5 @@ export interface Element {
   active: boolean;
   kinds: string;
 }
+
+export const intervalTime = 60000;

@@ -1,5 +1,19 @@
+@font-face {
+  font-family: 'MontRegular';
+  src: url('../../assets/Mont/Mont-Regular.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MontBold";
+  src: url("../../assets/Mont/Mont-Bold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+}
+
 .card {
-  margin: 0px 1.25rem 0px;
+  margin: 0px 1.25rem 1.563rem;
   border-radius: 0.5rem;
   border-style: solid;
   border-width: thick;
@@ -14,41 +28,41 @@
   justify-content: space-between;
 }
 
-.photo {
-  background-image: url("../../assets/cards_photo.png");
-  margin-right: 1.25rem;
-  flex-basis: 50%;
-  border-radius: 0.5rem;
-  width: 14.438rem;
-  height: 6.188rem;
-  margin-top: 1.25rem;
-  margin-left: 1.25rem;
-  display: flex;
-  justify-content: end;
-  align-items: end;
-}
 
 .attributes {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
+  height: 18px;
+  width: 18px;
 }
 
 .description {
+  max-height: 3em;
+  /* Обрезаем текст, если он не помещается в блоке */
+  overflow: hidden;
+  /* Добавляем многоточие в конце обрезанного текста */
+  text-overflow: ellipsis;
+  /* Запрещаем перенос слов */
+  white-space: wrap;
   margin-left: 1.25rem;
   margin-right: 1.25rem;
   width: 18rem;
-  height: 2.5rem;
   font-size: 0.75rem;
-  line-height: 1rem;
+  font-family: MontRegular;
+  font-weight: 600;
 }
 
 .low_buttons {
   display: flex;
-  margin: 1.25rem;
+  margin: 0 1.25rem 0;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 .name {
+  font-family: MontBold;
+  font-size: 1rem;
+  font-weight: 600;
   flex-basis: 50%;
   justify-content: flex-end;
   align-self: center;

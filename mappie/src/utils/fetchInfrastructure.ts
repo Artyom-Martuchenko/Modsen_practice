@@ -25,8 +25,8 @@ export const fetchInfrastructure = async ({
     return true;
   };
 
-  const apiUrl = process.env.OPEN_TRIP_MAP_API_INFRASTRUCTURE;
-  const apiKey = process.env.OPEN_TRIP_MAP_API_KEY;
+  const apiUrl = "https://api.opentripmap.com/0.1/ru/places/radius"; //apiUrl
+  const apiKey = "5ae2e3f221c38a28845f05b63c4541753ad62fc8c2b126b0b6433cb6"; //apiKey
 
   try {
     if (apiUrl !== undefined && apiKey !== undefined) {

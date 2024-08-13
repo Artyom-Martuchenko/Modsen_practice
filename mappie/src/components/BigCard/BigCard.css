@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'MontBold';
+  src: url('../../assets/Mont/Mont-Bold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontRegular';
+  src: url('../../assets/Mont/Mont-Regular.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
 .big_cards_main {
   border-radius: 10px;
   border-style: solid;
@@ -5,16 +19,24 @@
   border-color: rgba(196, 196, 196, 1);
   margin: 0px 1.25rem 0px;
   border-radius: 0.5rem;
-  width: 21.875rem;
-  height: 14.438rem;
+  width: 27.5rem;
+  height: 44.625rem;
+  position: relative;
 }
 
 .big_cards_photo {
-  width: 20rem;
+  width: 25rem;
   height: 18.75rem;
   border-radius: 10px;
-  background-color: gray;
+  background-color: white;
   margin: 1.25rem 1.25rem 0;
+}
+
+#big_cards_group {
+  margin: 1.25rem 1.875rem 2.188rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .big_cards_div {
@@ -24,28 +46,104 @@
 .big_cards_attributes {
   width: 30px;
   height: 30px;
-  background-color: gray;
-}
-
-#big_cards_group {
-  margin: 1.25rem 1.875rem 2.188rem;
+  background-color: white;
 }
 
 #big_cards_group_buttons {
-  height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2.188rem;
 }
 
-button {
-  all: unset;
-  height: 2.5rem;
-  border-radius: 5px;
-}
-
-#button_save {
+.button_save_active {
+  background-color: white;
   border-style: solid;
   border-width: thick;
-  border-color: gray;
+  border-radius: 5px;
+  border-color: rgba(196, 196, 196, 1);
+  color: rgba(196, 196, 196, 1);
   width: 9.625rem;
+/*   all: unset; */
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_save_disactive {
+  background-color: rgba(199, 94, 94, 1);
+  color: white;
+  border-radius: 5px;
+  border-color: rgba(199, 94, 94, 1);
+  width: 9.625rem;
+  height: 2.5rem;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_search_disactive {
+  background-color: rgba(94, 123, 199, 1);
+  color: white;
+  border-radius: 5px;
+  border-color: rgba(94, 123, 199, 1);
+  width: 9.625rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big_card_text{
+  /* max-height: 8em; */
+  /* Обрезаем текст, если он не помещается в блоке */
+  /* overflow: hidden; */
+  /* Добавляем многоточие в конце обрезанного текста */
+  /* text-overflow: ellipsis; */
+  /* Запрещаем перенос слов */
+  /* white-space: wrap; */
+  font-family: MontRegular;
+  font-size: 0.625rem;
+  font-weight: 600;
+}
+
+.big_card_name {
+  font-family: MontBold;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+#big_card_direction{
+  background-color: rgba(94, 123, 199, 1);
+}
+
+#big_card_walking{
+  color: rgba(66, 178, 58, 1);
+  border-color: rgba(66, 178, 58, 1);
+}
+
+#big_card_car{
+  color: rgba(201, 198, 55, 1);
+  border-color: rgba(201, 198, 55, 1);
+}
+
+#big_card_save{
+  margin-left: 0;
+}
+
+.big_card_button_text{
+  margin: 0px;
+  font-family: MontRegular;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.big_card_button_icon{
+  width: 1rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
 }

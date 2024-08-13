@@ -13,6 +13,7 @@ import church from'@/church.png';
 import food from'@/food.png';
 import hotels from'@/hotels.png';
 import intresting_places from '@/other.png';
+import select_position from '@/select_position.png'
 import { Icon } from 'leaflet';
 
 
@@ -259,5 +260,10 @@ export const customFood = new Icon({
 
 export const customHotels = new Icon({
   iconUrl: require("../assets/hotels.png"),
+  iconSize: [Marker_icon_width, Marker_icon_height],
+});
+
+export const customSelectPosition = new Icon({
+  iconUrl: require("../assets/select_position.png"),
   iconSize: [Marker_icon_width, Marker_icon_height],
 });

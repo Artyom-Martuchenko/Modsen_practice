@@ -52,8 +52,8 @@ export function Direction({
   end: number[];
   profile: "driving-car" | "foot-walking" | null;
 }) {
-  const apiKey = process.env.OPEN_ROUTE_SERVICE_KEY;
-  const apiUrl = process.env.OPEN_ROUTE_SERVCE;
+  const apiKey = "5b3ce3597851110001cf62483fa5a58ee172490c9e958d4a7382d1dd";
+  const apiUrl = "https://api.openrouteservice.org/v2/directions";
   if(apiKey === undefined || apiUrl === undefined){
     throw Error('Cant get process.env')
   }
@@ -76,6 +76,7 @@ export function Direction({
   }, [profile])
     
   return <>
-    {profile !== null && <Polyline pathOptions={{ color: "red" }} positions={routeData}/>}  
+    {profile == 'driving-car' && <Polyline pathOptions={{ color: "yellow" }} positions={routeData}/>}  
+    {profile == 'foot-walking' && <Polyline pathOptions={{ color: "green" }} positions={routeData}/>}  
   </>
 }
